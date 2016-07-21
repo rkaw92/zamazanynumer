@@ -1,13 +1,59 @@
 html
 	head
 		title
+		link(rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/base-min.css")
+		link(rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css")
+		style(type="text/css").
+			header, main {
+				display: block;
+				min-width: 400px;
+				width: 400px;
+				margin: 0 auto;
+			}
+			
+			section {
+				border: 1px solid #CCC;
+				border-radius: 4px;
+				padding: 1.0em;
+				margin-bottom: 1.0em;
+			}
+			
+			input[type=submit] {
+				margin-left: 0.5em;
+			}
+			
+			ul.possibilities {
+				padding: 0;
+				list-style-type: none;
+			}
+			
+			ul.possibilities input[type=checkbox] {
+				margin-right: 1.0em;
+				width: 24px;
+				height: 24px;
+				vertical-align: middle;
+			}
+			
+			ul.possibilities li {
+				font-size: 24px;
+			}
 	body
-		h1 Odczytaj zamazany NIP
-		form(action="/" method="get")
-			input(name="input" type="text" value=input)
-			input(type="submit" value="Sprawdź")
-		if possibilities
-			h2= 'Możliwości dla ' + input
-			ol
-			each possibility in possibilities
-				li= possibility
+		header
+			h1 Odczytaj zamazany NIP
+		main
+			section
+				form.pure-form(action="/" method="get")
+					fieldset
+						legend Sprawdź, jaki to NIP
+						p.
+							W poniższe pole wprowadź NIP (bez myślników), którego nie udało Ci się w pełni odczytać. Zastąp znaki, które są zamazane, znakiem <em>*</em>.
+						input(name="input" type="text" value=input)
+						input.pure-button.pure-button-primary(type="submit" value="Sprawdź")
+			section
+				if possibilities
+					h2= 'Możliwości dla ' + input
+					ul.possibilities
+						each possibility in possibilities
+							li
+								input(type="checkbox")
+								=possibility
