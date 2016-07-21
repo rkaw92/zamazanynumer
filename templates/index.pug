@@ -1,0 +1,13 @@
+html
+	head
+		title
+	body
+		h1 Odczytaj zamazany NIP
+		form(action="/" method="get")
+			input(name="input" type="text" value=input)
+			input(type="submit" value="Sprawdź")
+		if possibilities
+			h2= 'Możliwości dla ' + input
+			ol
+			each possibility in possibilities
+				li= possibility
