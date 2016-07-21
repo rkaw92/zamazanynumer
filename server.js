@@ -15,7 +15,7 @@ const express = require('express');
 
 function substituteX(template, values) {
 	let valueIndex = 0;
-	return template.replace(/x/g, function(match) {
+	return template.replace(/[*_?x]/g, function(match) {
 		const finalValue = values[valueIndex];
 		valueIndex += 1;
 		return finalValue;
@@ -48,7 +48,7 @@ const guessers = {
 			}
 		}
 		const possibilities = [];
-		const placeholderCount = (input.match(/x/g) || []).length;
+		const placeholderCount = (input.match(/[*_?x]/g) || []).length;
 		if (placeholderCount > constraints.maxPlaceholders) {
 			throw new InputError('Too many placeholders', 'MAX_PLACEHOLDERS');
 		}
